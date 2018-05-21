@@ -24,6 +24,28 @@ To build modules, i use [disutils](https://docs.python.org/2/distutils/). You ne
 The debugging of the modules is pretty straight forward. Simply use gdb. ```gdb python2``` starts the Python2 shell in gdb. Then run it in gdb and use your module in the python shell. 
 I used the interrupt signal directly in the code to "set breakpoints" which is hard otherwhise (i don't know how it would work...). I learned [here](https://stackoverflow.com/questions/4326414/set-breakpoint-in-c-or-c-code-programmatically-for-gdb-on-linux#4326474) how to do that.
 
+## Tables
+
+Helpful tables i stole from some tutorial mentioned earlier.
+
+### C constants corresponding to storage types
+
+|Constant              |element data type|
+|----------------------|-----------------|
+|PyArray_CHAR          |char             |
+|PyArray_UBYTE         |unsigned char    |
+|PyArray_SBYTE         |signed char      |
+|PyArray_SHORT         |short            |
+|PyArray_INT           |int              |
+|PyArray_LONG          |long             |
+|PyArray_FLOAT         |float            |
+|PyArray_DOUBLE        |double           |
+|PyArray_CFLOAT        |float[2]         |
+|PyArray_CDOUBLE       |double[2]        |
+|PyArray_OBJECT        |PyObject *       |
+
+These constants can be used to compare them to inputArray->descr->type_num to determine the data type of the numpy array.
+
 ## Notes
 
 Stuff i want to note: 
