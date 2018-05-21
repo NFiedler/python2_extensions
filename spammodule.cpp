@@ -22,54 +22,28 @@ static PyObject* add(PyObject* self, PyObject* args) {
     return Py_BuildValue("i", a + b);
 }
 
-static PyObject *
+static PyObject* trace(PyObject *self, PyObject *args) {
+    PyArrayObject *array;
+    double sum;
+    int i, n;
+     
 
-trace(PyObject *self, PyObject *args)
+    if (!PyArg_ParseTuple(args, "O!", &PyArray_Type, &array))
+        return NULL;
+    if (array->nd != 2 || array->descr->type_num != PyArray_DOUBLE) {
+        PyErr_SetString(PyExc_ValueError,
+            "array must be two-dimensional and of type float");
+        return NULL;
+    }
+     
+    n = array->dimensions[0];
+    if (n > array->dimensions[1])
+    n = array->dimensions[1];
+    sum = 0.;
+    for (i = 0; i < n; i++)
+    sum += *(double *)(array->data + i*array->strides[0] + i*array->strides[1]);
 
-{
-
-PyArrayObject *array;
-
-double sum;
-
-int i, n;
-
- 
-
-if (!PyArg_ParseTuple(args, "O!",
-
-&PyArray_Type, &array))
-
-return NULL;
-
-if (array->nd != 2 || array->descr->type_num != PyArray_DOUBLE) {
-
-PyErr_SetString(PyExc_ValueError,
-
-"array must be two-dimensional and of type float");
-
-return NULL;
-
-}
-
- 
-
-n = array->dimensions[0];
-
-if (n > array->dimensions[1])
-
-n = array->dimensions[1];
-
-sum = 0.;
-
-for (i = 0; i < n; i++)
-
-sum += *(double *)(array->data + i*array->strides[0] + i*array->strides[1]);
-
- 
-
-return PyFloat_FromDouble(sum);
-
+    return PyFloat_FromDouble(sum);
 }
 
 static PyObject* spam_system_plus_1(PyObject* self, PyObject* args) {
