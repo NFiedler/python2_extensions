@@ -46,6 +46,26 @@ Helpful tables i stole from some tutorial mentioned earlier.
 
 These constants can be used to compare them to inputArray->descr->type_num to determine the data type of the numpy array.
 
+### Method Mapping Table Flags
+
+The method mapping table is an array of PyMethodDef structs. They look like this:
+```c
+struct PyMethodDef {
+    char *ml_name;
+    PyCFunction ml_meth;
+    int ml_flags;
+    char *ml_doc;
+};
+```
+
+|ml_flag              |meaning                    |
+|---------------------|---------------------------|
+|```METH_VARARGS```   |a fixed number of args     |
+|```METH_KEYWORDS```  |args referenced by keywords|
+|```METH_NOARGS```    |no arguments               |
+
+```METH_VARARGS | METH_KEYWORDS``` accepts both, some fixed args and keyword args.
+
 ## Notes
 
 Stuff i want to note: 
