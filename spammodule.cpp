@@ -38,10 +38,36 @@ static PyObject* trace(PyObject *self, PyObject *args) {
      
     n = array->dimensions[0];
     if (n > array->dimensions[1])
-    n = array->dimensions[1];
+        n = array->dimensions[1];
     sum = 0.;
     for (i = 0; i < n; i++)
-    sum += *(double *)(array->data + i*array->strides[0] + i*array->strides[1]);
+        sum += *(double *)(array->data + i*array->strides[0] + i*array->strides[1]);
+
+    return PyFloat_FromDouble(sum);
+}
+
+static PyObject* trace3D(PyObject *self, PyObject *args) {
+    PyArrayObject *array;
+    double sum;
+    int i, n;
+     
+
+    if (!PyArg_ParseTuple(args, "O!", &PyArray_Type, &array))
+        return NULL;
+    if (array->nd != 3 || array->descr->type_num != PyArray_DOUBLE) {
+        PyErr_SetString(PyExc_ValueError,
+            "array must be three-dimensional and of type float");
+        return NULL;
+    }
+     
+    n = array->dimensions[0];
+    if (n > array->dimensions[1])
+        n = array->dimensions[1];
+    if (n > array->dimensions[2])
+        n = array->dimensions[2];
+    sum = 0.;
+    for (i = 0; i < n; i++)
+        sum += *(double *)(array->data + i*array->strides[0] + i*array->strides[1] + i*array->strides[2]);
 
     return PyFloat_FromDouble(sum);
 }
@@ -62,7 +88,8 @@ static PyMethodDef SpamMethods[] = {
     {"add",  add, METH_VARARGS, "Add two integers"},
     {"system",  spam_system, METH_VARARGS, "Execute a shell command."},
     {"systemplus1",  spam_system_plus_1, METH_VARARGS, "Execute a shell command. Adds 1 to return value"},
-    {"trace",  trace, METH_VARARGS, "Execute a shell command. Adds 1 to return value"},
+    {"trace",  trace, METH_VARARGS, ""},
+    {"trace3D",  trace3D, METH_VARARGS, ""},
     {NULL, NULL, 0, NULL}
 };
 
