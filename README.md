@@ -14,6 +14,8 @@ A list of tutorials i found helpful. Please note that a lot of all the other stu
 * https://docs.scipy.org/doc/numpy/user/c-info.how-to-extend.html
 * https://scipy-cookbook.readthedocs.io/items/C_Extensions_NumPy_arrays.html
 
+The [NumPy C-API Reference](https://docs.scipy.org/doc/numpy/reference/c-api.html) provides plain facts about all the numpy stuff you might need. Try to look up everything you don't completely understand. The tutorials mentioned before are pretty old and use deprecated functions and shit. They are still useful to understand the context in which you are working. 
+
 ## Building a module
 
 To build modules, i use [disutils](https://docs.python.org/2/distutils/). You need to set up a [setup.py](https://docs.python.org/2/distutils/setupscript.html) and then run the build with it.

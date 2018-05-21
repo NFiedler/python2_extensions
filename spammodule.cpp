@@ -84,12 +84,24 @@ static PyObject* spam_system_plus_1(PyObject* self, PyObject* args) {
     return Py_BuildValue("i", sts);
 }
 
+static PyObject* npArray(PyObject* self, PyObject* args) {
+    npy_intp dimensions[1] = {3};
+    PyArrayObject* pyArray = (PyArrayObject*) PyArray_SimpleNew(1, dimensions, PyArray_INT);
+    int* arraydata = (int*) pyArray->data;
+    arraydata[0] = 59;
+    arraydata[1] = 42;
+    arraydata[2] = 7991;
+
+    return PyArray_Return(pyArray);
+}
+
 static PyMethodDef SpamMethods[] = {
     {"add",  add, METH_VARARGS, "Add two integers"},
     {"system",  spam_system, METH_VARARGS, "Execute a shell command."},
     {"systemplus1",  spam_system_plus_1, METH_VARARGS, "Execute a shell command. Adds 1 to return value"},
     {"trace",  trace, METH_VARARGS, ""},
     {"trace3D",  trace3D, METH_VARARGS, ""},
+    {"getNpArray",  npArray, METH_NOARGS, "returns a simply numpy array."},
     {NULL, NULL, 0, NULL}
 };
 
