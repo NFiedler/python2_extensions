@@ -95,13 +95,26 @@ static PyObject* npArray(PyObject* self, PyObject* args) {
     return PyArray_Return(pyArray);
 }
 
+static PyObject* npArray2D(PyObject* self, PyObject* args) {
+    npy_intp dimensions[] = {2, 2};
+    PyArrayObject* pyArray = (PyArrayObject*) PyArray_SimpleNew(2, dimensions, PyArray_INT);
+    int* arraydata = (int*) pyArray->data;
+    arraydata[0] = 59;
+    arraydata[1] = 42;
+    arraydata[2] = 7991;
+    arraydata[2] = 7992;
+
+    return PyArray_Return(pyArray);
+}
+
 static PyMethodDef SpamMethods[] = {
     {"add",  add, METH_VARARGS, "Add two integers"},
     {"system",  spam_system, METH_VARARGS, "Execute a shell command."},
     {"systemplus1",  spam_system_plus_1, METH_VARARGS, "Execute a shell command. Adds 1 to return value"},
     {"trace",  trace, METH_VARARGS, ""},
     {"trace3D",  trace3D, METH_VARARGS, ""},
-    {"getNpArray",  npArray, METH_NOARGS, "returns a simply numpy array."},
+    {"getNpArray",  npArray, METH_NOARGS, "returns a simple numpy array."},
+    {"getNpArray2D",  npArray2D, METH_NOARGS, "returns a simple 2d numpy array."},
     {NULL, NULL, 0, NULL}
 };
 
