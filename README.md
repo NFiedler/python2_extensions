@@ -3,6 +3,7 @@ a collection of my attempts to extend python and numpy
 
 When i wanted to start writing extensions for python/numpy i had a really hard time finding tutorials, examples and documentation.
 Here i try to collect Tutorials and stuff i borrowed from somewhere else and self written snippets. 
+[Here](https://docs.python.org/2/c-api/index.html), you can find the [official Python C-API documentation](https://docs.python.org/2/c-api/index.html)
 
 ## Tutorials 
 
