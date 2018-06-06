@@ -73,3 +73,4 @@ struct PyMethodDef {
 
 Stuff i want to note: 
 * don't forget to use ```import_array();``` in your module initialization method when you use numpy arrays
+* https://gist.github.com/rjzak/5681680 is very helpful for lists and vectors
